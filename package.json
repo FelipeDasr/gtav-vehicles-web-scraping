@@ -19,5 +19,8 @@
   "homepage": "https://github.com/FelipeDasr/gtav-vehicles-web-scraping#readme",
   "devDependencies": {
     "typescript": "^4.9.5"
+  },
+  "dependencies": {
+    "puppeteer": "^19.7.0"
   }
 }
