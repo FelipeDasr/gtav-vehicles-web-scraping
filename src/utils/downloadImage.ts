@@ -3,7 +3,7 @@ import axios from 'axios';
 import fs from 'fs';
 
 export async function downloadImage(url: string, filename: string) {
-    const filePath = path.resolve(__dirname, 'output', 'images', `${filename}.jpg`);
+    const filePath = path.resolve(__dirname, 'output', 'images', `${filename}.png`);
     const writer = fs.createWriteStream(filePath);
 
     const response = await axios({
