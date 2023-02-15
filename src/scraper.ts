@@ -16,7 +16,7 @@ export class Scraper {
 
     private async setBrowser() {
         this.browser = await puppeteer.launch({
-            headless: false,
+            headless: true,
             timeout: 10000,
         });
     }
