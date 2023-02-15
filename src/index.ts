@@ -1,4 +1,5 @@
 import { Scraper } from './scraper';
+import fs from 'fs';
 
 (async () => {
     const scraper = new Scraper();
@@ -7,5 +8,5 @@ import { Scraper } from './scraper';
     const result = await scraper.start('wiki-rage');
     await scraper.closeBrowser();
 
-    console.log(result);
+    fs.writeFileSync('result.json', JSON.stringify(result, null, 2));
 })();
