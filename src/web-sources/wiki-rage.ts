@@ -23,7 +23,6 @@ export class IWikiRaceScraper implements IGtavVehicleScraper {
         const result = await mainElement?.evaluate(
             (ele, excluded, baseUrl) => {
                 const response = {} as IScrapingResponse;
-                let tot = 0;
                 let theNextValidElementIsCategory = false;
                 let vehicleType: string | undefined;
 
@@ -56,7 +55,7 @@ export class IWikiRaceScraper implements IGtavVehicleScraper {
                             if (!response[vehicleType as VehicleType]) {
                                 Object.assign(response, { [vehicleType as VehicleType]: [] });
                             }
-                            tot++;
+
                             (response[vehicleType as VehicleType] as IVehicle[]).push({
                                 vehicle_name: vehicleName as string,
                                 thumbnail_url: thumbUrl,
@@ -64,7 +63,7 @@ export class IWikiRaceScraper implements IGtavVehicleScraper {
                         }
                     }
                 }
-                console.log(tot);
+
                 return response;
             },
             exclude,
