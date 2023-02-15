@@ -6,6 +6,10 @@ import { VehicleType } from './dtos/vehicle';
 export class Scraper {
     private browser: Browser;
 
+    constructor() {
+        this.browser = {} as Browser;
+    }
+
     public async init() {
         await this.setBrowser();
     }
