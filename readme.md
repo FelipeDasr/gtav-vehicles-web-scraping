@@ -67,6 +67,19 @@ const result = await scraper.start(
 );
 ```
 
+### Define vehicle to be excluded from search
+
+The last parameter in the **`scraper.start()`** method is the vehicles to be excluded from the search (**optional**), you must define a string array that contains all the vehicles that you want to exclude.
+
+```ts
+const scraper = new Scraper();
+await scraper.init();
+
+const result = await scraper.start(
+    'wiki-rage', [], ['benson', 'biff', 'cerberus', 'cerberus2']
+);
+```
+
 <br/>
 
 ## Output folder
