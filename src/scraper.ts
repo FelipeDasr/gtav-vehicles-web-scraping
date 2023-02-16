@@ -32,8 +32,8 @@ export class Scraper {
         await this.browser.close();
     }
 
-    public async start(sourceName: IWebSource, exclude?: VehicleType[]) {
+    public async start(sourceName: IWebSource, exclude?: VehicleType[], vehiclesToExclude?: string[]) {
         const source = await this.getWebSource(sourceName);
-        return source.scrape(this.browser, exclude);
+        return source.scrape(this.browser, exclude, vehiclesToExclude);
     }
 }

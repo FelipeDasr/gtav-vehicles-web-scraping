@@ -9,7 +9,7 @@ export class IWikiRaceScraper implements IGtavVehicleScraper {
         this.changedError = new Error('No element childrens found (possible web source changed)');
     }
 
-    public async scrape(browser: Browser, exclude?: VehicleType[]) {
+    public async scrape(browser: Browser, exclude?: VehicleType[], vehiclesToExclude?: string[]) {
         const baseUrl = 'https://wiki.rage.mp';
         const page = await browser.newPage();
         await page.goto(baseUrl + '/index.php?title=Vehicles');
@@ -21,7 +21,7 @@ export class IWikiRaceScraper implements IGtavVehicleScraper {
         }
 
         const result = await mainElement?.evaluate(
-            (ele, excluded, baseUrl) => {
+            (ele, excluded, baseUrl, vehiclesToExclude) => {
                 const response = {} as IScrapingResponse;
                 let theNextValidElementIsCategory = false;
                 let vehicleType: string | undefined;
@@ -52,6 +52,10 @@ export class IWikiRaceScraper implements IGtavVehicleScraper {
                             const vehicleNameElement = vehicleElement.querySelector('div.gallerytext > p > code');
                             const vehicleName = vehicleNameElement?.textContent;
 
+                            if (vehiclesToExclude) {
+                                if (vehiclesToExclude.includes(vehicleName as string)) continue;
+                            }
+
                             if (!response[vehicleType as VehicleType]) {
                                 Object.assign(response, { [vehicleType as VehicleType]: [] });
                             }
@@ -67,7 +71,8 @@ export class IWikiRaceScraper implements IGtavVehicleScraper {
                 return response;
             },
             exclude,
-            baseUrl
+            baseUrl,
+            vehiclesToExclude
         );
 
         return result;
