@@ -3,5 +3,5 @@ import { Browser } from 'puppeteer';
 
 export type IScrapingResponse = Partial<{ [Key in VehicleType]: IVehicle[] }>;
 export interface IGtavVehicleScraper {
-    scrape(browser: Browser, exclude?: VehicleType[], vehiclesToExclude?: string[]): Promise<IScrapingResponse>;
+    scrape(browser: Browser, categoriesToExclude?: VehicleType[], vehiclesToExclude?: string[]): Promise<IScrapingResponse>;
 }
